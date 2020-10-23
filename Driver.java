@@ -2,16 +2,17 @@ import java.util.Scanner;
 
 public class Driver {
 	
-	public static void printRecord (Record[] records, String recordTitle) {
+public static void printRecord (Record[] records, String recordTitle) {
 		
 		for (int i = 0; i < records.length; i++) {
 			if(records[i].getRecordTitle().equalsIgnoreCase(recordTitle)) {
 				
-				System.out.println("ID: " + records[i].getId() + " title "
-								+ records[i].getRecordTitle() + " singer: " 
-								+ records[i].getSingerName() + ", length of the song is " 
-								+ records[i].getRecordLength() + ", with ranking " 
+				System.out.println("ID: " + records[i].getId() + "\nTitle: "
+								+ records[i].getRecordTitle() + "\nSinger: " 
+								+ records[i].getSingerName() + "\nLength of the song: " 
+								+ records[i].getRecordLength() + "\nRanking: " 
 								+ records[i].getrecordRanking());
+			}
 			
 		}
 	}
@@ -20,9 +21,8 @@ public class Driver {
 		
 		for (int i = 0; i < records.length; i++) {
 			if (records[i].getRecordTitle().equalsIgnoreCase(titleFromUser)) {
-				return index;
+				return i;
 			}
-			a++;
 		}
 		return -1;		
 	}
@@ -31,7 +31,7 @@ public class Driver {
 		
 		double sum = 0.0;
 		for (int i = 0; i < records.length; i++) {
-			sum += records.getRecordLength();
+			sum += records[i].getRecordLength();
 		}
 		
 		return sum / (double)records.length;
@@ -42,37 +42,25 @@ public class Driver {
 	
 		double sum = 0.0;
 		for (int i = 0; i < records.length; i++) {
-			sum += records.getrecordRanking();
+			sum += records[i].getrecordRanking();
 		}
 		
 		return sum / (double)records.length;
 	}
 	
-	//public static void selectedSong (Record)
-	
 
 	public static void main(String[] args) {
 		
-		
-		Record r1 = new Record (Record.setId(), "Tonight", "One", 2.8, 4);
-		Record r2 = new Record (Record.setId(), "Without", "One", 3.2, 5);
-		Record r3 = new Record (Record.setId(), "My crazy", "One", 2.7, 5);
-		Record r4 = new Record (Record.setId(), "Sick", "Two", 2.8, 4);
-		Record r5 = new Record (Record.setId(), "Boy", "Petr", 2.8, 4);
-		Record r6 = new Record (Record.setId(), "Miss you", "Two", 2.8, 4);
-		Record r7 = new Record (Record.setId(), "You know that...", "Voplatka", 2.8, 4);
-		
 		Record[] records = new Record[7];
 		
-		records[0] = r1;
-		records[1] = r2;
-		records[2] = r3;
-		records[3] = r4;
-		records[4] = r5;
-		records[5] = r6;
-		records[6] = r7;
+		records[0] = new Record ("Tonight", "One", 2.8, 4);
+		records[1] = new Record ("Without", "One", 3.2, 5);
+		records[2] = new Record ("My crazy", "One", 2.7, 5);
+		records[3] = new Record ("Sick", "Two", 2.8, 4);
+		records[4] = new Record ("Boy", "Petr", 2.8, 4);
+		records[5] = new Record ("Miss you", "Two", 2.8, 4);
+		records[6] = new Record ("You know that...", "Voplatka", 2.8, 4);
 		
-		printRecord(records);
 		
 		Scanner input = new Scanner(System.in);
 		
@@ -82,21 +70,17 @@ public class Driver {
 		
 		
 		int index = findSongIndex(records, titleFromUser);
-		System.out.println(index);
-		
-		/*
-		if (index == -1) {
-			System.err.println("We don't have " + titleFromUser);
+		if (index < 0) {
+			System.err.println("The title: " + titleFromUser + " is not in the database");
 		} else {
-			printRecord(records[index]);
-			}
-		*/
-		
+			printRecord(records, titleFromUser);
 		}
 		
+		System.out.println();
+		System.out.println("Index of the record is: " + index);
+		System.out.println();
 		
-		
-
+		System.out.println("The average length of records " + getAverageLength(records));
+		System.out.println("The average records ranking is " + getAverageRanking(records));		
 	}
-
 }

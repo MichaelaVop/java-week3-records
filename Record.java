@@ -17,7 +17,7 @@ public class Record {
 		
 	}
 	
-	public int setId() {
+	public void setId() {
 		int randomNum = (int)(Math.random() * 9901) + 100;
 		this.id = randomNum;
 	}
@@ -53,6 +53,4 @@ public class Record {
 	public double getRecordLength () {return recordLength;}
 	public int getrecordRanking () {return recordRanking;}
 	
-	
-
 }
